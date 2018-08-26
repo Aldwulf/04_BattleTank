@@ -24,4 +24,7 @@ public:
 	ATank* GetControlledTank() const;
 
 	void AimTowardsCrosshair();
+
+private:
+	bool GetSightRayHitLocation(FVector& HitLocation) const;
 };
