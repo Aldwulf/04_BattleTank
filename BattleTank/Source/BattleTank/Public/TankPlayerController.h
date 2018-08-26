@@ -21,10 +21,17 @@ public:
 
 	virtual void Tick(float DeltaTime) override;
 
+private:
 	ATank* GetControlledTank() const;
 
 	void AimTowardsCrosshair();
 
-private:
 	bool GetSightRayHitLocation(FVector& HitLocation) const;
+
+	UPROPERTY(EditAnywhere)
+	float CrosshairXLocation = 0.5;
+
+	UPROPERTY(EditAnywhere)
+	float CrosshairYLocation = 0.33333;
+
 };
