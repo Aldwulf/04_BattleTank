@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankAimingComponent.h"
-
+#include "Classes/Kismet/GameplayStatics.h"
 
 // Sets default values for this component's properties
 UTankAimingComponent::UTankAimingComponent()
@@ -41,5 +41,34 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 	///auto OurTankName = GetOwner()->GetName();
 	///auto BarrelLocation = Barrel->GetComponentLocation().ToString();
 	///UE_LOG(LogTemp, Warning, TEXT("%s is aiming at %s from %s"), *OurTankName, *HitLocation.ToString(), *BarrelLocation);
-	UE_LOG(LogTemp, Warning, TEXT("Firing at %f"), LaunchSpeed);
+	if (!Barrel) { return; }
+
+	FVector OutLaunchVelocity = FVector(0.0f);
+	FVector StartLocation = Barrel->GetSocketLocation(FName("BarrelEnd"));
+
+	bool bAimSolution = UGameplayStatics::SuggestProjectileVelocity(
+		this,
+		OutLaunchVelocity,
+		StartLocation,
+		HitLocation,
+		LaunchSpeed,
+		ESuggestProjVelocityTraceOption::DoNotTrace
+	);
+
+	if (bAimSolution)
+	{
+		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
+		///auto TankName = GetOwner()->GetName();
+		///UE_LOG(LogTemp, Warning, TEXT("%s is aiming at %s"), *TankName, *AimDirection.ToString());
+		MoveBarrelTowards(AimDirection);
+	}
+}
+
+void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
+{
+	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
+	auto AimAsRotator = AimDirection.Rotation();
+	auto DeltaRotator = AimAsRotator - BarrelRotator;
+
+	UE_LOG(LogTemp, Warning, TEXT("DeltaRotator: %s"), *DeltaRotator.ToString())
 }
