@@ -20,7 +20,7 @@ public:
 private:
 	// Maximum Rotation per second (degrees)
 	UPROPERTY(EditAnywhere, Category = Setup)
-	float MaxRotationPerSecond = 10;
+	float MaxRotationPerSecond = 20;
 
 	
 };
