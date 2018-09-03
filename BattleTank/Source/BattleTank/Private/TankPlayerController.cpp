@@ -29,11 +29,13 @@ void ATankPlayerController::Tick(float DeltaTime)
 ATank* ATankPlayerController::GetControlledTank() const
 {
 	return Cast<ATank>(GetPawn());
+	// this code might be redundant now
 }
 
 void ATankPlayerController::AimTowardsCrosshair()
 {
-	if (!GetControlledTank()) { return; }
+	//if (!GetControlledTank()) { return; }
+	if (!GetPawn()) { return; }
 
 	FVector HitLocation;	// OUT parameter
 	if (GetSightRayHitLocation(HitLocation))
