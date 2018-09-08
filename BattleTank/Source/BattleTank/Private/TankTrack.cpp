@@ -2,6 +2,16 @@
 
 #include "TankTrack.h"
 
+UTankTrack::UTankTrack()
+{
+	PrimaryComponentTick.bCanEverTick = true;
+}
+
+void UTankTrack::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction)
+{
+	///auto SlippageSpeed = 
+}
+
 void UTankTrack::SetThrottle(float Throttle)
 {
 	///auto Time = GetWorld()->GetTimeSeconds();
