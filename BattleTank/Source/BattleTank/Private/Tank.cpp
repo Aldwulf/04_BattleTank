@@ -22,6 +22,8 @@ void ATank::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	auto TankName = GetName();
+	UE_LOG(LogTemp, Warning, TEXT("MULE: %s: C++ BeginPlay."), *TankName)
 }
 
 void ATank::AimAt(FVector HitLocation)
