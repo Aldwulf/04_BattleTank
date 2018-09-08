@@ -21,15 +21,10 @@ void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool
 
 	IntendMoveForward(ForwardThrow);
 	IntendTurnRight(RightThrow);
-
-	///UE_LOG(LogTemp, Warning, TEXT("%s vectoring to %s"), *TankName, *AIForwardIntention)
 }
 
 void UTankMovementComponent::IntendMoveForward(float Throw)
 {
-	///auto Time = GetWorld()->GetTimeSeconds();
-	///UE_LOG(LogTemp, Warning, TEXT("IntendMoveForward! Throw: %f"), Throw);
-
 	if (!ensure(LeftTrack && RightTrack)) { return; }
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(Throw);

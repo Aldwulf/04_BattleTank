@@ -7,7 +7,7 @@
 #include "TankPlayerController.generated.h" /// Must always be the last include!
 
 ///Forward Declarations
-class ATank;
+class UTankAimingComponent;
 
 /**
  * Responsible for helping the AI aim.
@@ -23,9 +23,6 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 protected:
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	ATank* GetControlledTank() const;
-
 	UFUNCTION(BlueprintImplementableEvent, Category = Setup)
 	void FoundAimingComponent(UTankAimingComponent* AimingCompRef);
 

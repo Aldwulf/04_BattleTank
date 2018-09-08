@@ -2,7 +2,6 @@
 
 #include "Tank.h"
 #include "Engine/World.h" /// So GetWorld etc are recognised
-#include "TankAimingComponent.h"
 #include "TankBarrel.h"
 #include "Projectile.h"
 
@@ -18,13 +17,6 @@ void ATank::BeginPlay()
 {
 	Super::BeginPlay();
 
-	TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
-}
-
-void ATank::AimAt(FVector HitLocation)
-{
-	if (!ensure(TankAimingComponent)) { return; }
-	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
 }
 
 void ATank::Fire()
